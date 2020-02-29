@@ -1,4 +1,9 @@
 package android.vergara.bibliotec
 
-class Note(val title: String,
-           val description: String)
+import java.io.Serializable
+
+class Note (val title: String,
+           val description: String,
+           val autor: String,
+           val resumo: String,
+           val paginas: Int): Serializable

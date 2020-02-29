@@ -3,10 +3,11 @@ package android.vergara.bibliotec
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.video_row.view.*
 
-class MainAdapter(private val notes: List<Note>): RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
+class MainAdapter(private val notes: List<Note>, val listener: (Note) -> Unit) : RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
 
     //number of item
     override fun getItemCount(): Int {
@@ -24,6 +25,11 @@ class MainAdapter(private val notes: List<Note>): RecyclerView.Adapter<MainAdapt
         val note = notes[position]
         holder.hdr_title.text = note.title
         holder.hdr_desc.text = note.description
+
+        holder.hdr_title.setOnClickListener{
+            listener(notes[position])
+        }
+
     }
 
     class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view){
