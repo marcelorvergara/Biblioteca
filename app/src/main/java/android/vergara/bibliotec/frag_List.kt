@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import kotlinx.android.synthetic.main.fragment_frag__titulo.view.*
 import kotlinx.android.synthetic.main.video_row.*
 
 /**
@@ -22,36 +23,40 @@ import kotlinx.android.synthetic.main.video_row.*
  */
 class frag_List : Fragment() {
 
+    var titulo_frag1: String? = ""
+    var desc_frag1: String? = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var rootView = inflater.inflate(R.layout.fragment_frag__list, container, false)
 
-        var livro_recyclerview = rootView.findViewById(R.id.video_recyclerview) as RecyclerView // Add this
+        var livro_recyclerview = rootView.findViewById(R.id.livro_recyclerview) as RecyclerView // Add this
 
         livro_recyclerview.adapter = MainAdapter(notes()) { Note ->
-            var intt = Intent(context,TerTela::class.java)
-
             var tit = Note.title
             var des = Note.description
             var aut = Note.autor
             var res = Note.resumo
             var pag = Note.paginas
+
+            var intt = Intent(context,TerTela::class.java)
             var livro = Note(tit,des,aut,res,pag)
             intt.putExtra("livro",livro)
             startActivity(intt)
 
             //Toast.makeText(Context = null,"${Note.title} clicked",Toast.LENGTH_LONG).show()
             Log.i(TAG, "${tit} clicked")
+
         }
 
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         livro_recyclerview.layoutManager = layoutManager
 
-
-
         return rootView
+
+
     }
 
     private fun notes(): List<Note> {
@@ -64,8 +69,8 @@ class frag_List : Fragment() {
                 "Web Services REST com ASP .NET Web API e Windows Azure","Autor: Paulo Siécola", "Resumo: A utilização de serviços REST é uma tendência que vem crescendo muito nos últimos anos, principalmente em APIs públicas, e ASP.NET Web API é a plataforma ideal para a criação de aplicações RESTful sob a plataforma .NET da Microsoft.",320),
             Note("Dom Quixote, 1605",
                 "Considerada a maior obra da literatura espanhola e o segundo livro mais lido da História","Autor: Miguel de Cervantes", "Resumo: Uma obra do escritor espanhol Miguel de Cervantes, publicada em duas partes. A primeira surgiu em 1605 e a segunda dez anos depois, em 1615. Quando o livro foi traduzido para inglês e francês obteve um êxito súbito, arrebatando leitores de diversas origens.",220),
-            Note("Guerra e Paz, Liev Tolstói, 1869",
-            "","Autor: Liev Tolstói", "Resumo: Guerra e Paz é um romance histórico escrito pelo autor russo Liev Tolstói e publicado entre 1865 e 1869 no Russkii Vestnik, um periódico da época. É uma das obras mais volumosas da história da literatura universal. O livro narra a história da Rússia à época de Napoleão Bonaparte.",679),
+            Note("Guerra e Paz, 1869",
+            "É um romance histórico escrito pelo autor russo Liev Tolstói e publicado entre 1865 e 1869 no Russkii Vestnik, um periódico da época.","Autor: Liev Tolstói", "Resumo: Guerra e Paz é um romance histórico escrito pelo autor russo Liev Tolstói e publicado entre 1865 e 1869 no Russkii Vestnik, um periódico da época. É uma das obras mais volumosas da história da literatura universal. O livro narra a história da Rússia à época de Napoleão Bonaparte.",679),
             Note("Rede de Computadores - Topologias Avançadas",
             "Distributed Systems: Principles and Paradigms","Autor: Andrew S. Tanenbaum", "Resumo: Esse novo livro, em co-autoria com Maarten van Steen, aborda tanto os conceitos fundamentais quanto os paradigmas dos modernos sistemas distribuídos.",750),
             Note("Os lusíadas",
@@ -79,4 +84,5 @@ class frag_List : Fragment() {
             Note("Moby Dick",
                 "O nome deste livro é o do cachalote (um animal parecido com uma baleia) enfurecido","Autor: Herman Melville", "Resumo: Publicado inicialmente em 1851, Moby Dick foi revolucionário para a época, com descrições intrincadas e imaginativas das aventuras do narrador Ismael. O romance foi baseado no naufrágio do navio Essex, comandado pelo capitão George Pollard. Na ocasião, ele foi atingido por uma baleia e afundou.",342))
     }
+
 }
