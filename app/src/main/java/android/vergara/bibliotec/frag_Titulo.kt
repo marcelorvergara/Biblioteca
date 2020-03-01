@@ -18,6 +18,13 @@ import kotlinx.android.synthetic.main.activity_ter_tela.view.*
  */
 class frag_Titulo : Fragment() {
 
+    companion object{
+        var retorno = listOf(
+            Note("Livro de Kotlin com Android",
+                "Este livro ensina a desenvolver aplicativos Android com a linguagem Kotlin.","Autor: Nelson Glauber", "Resumo: O Android é a plataforma do Google para dispositivos móveis que se tornou líder absoluta no mercado mundial, e a quantidade de recursos disponibilizada para os desenvolvedores permite criar uma envolvente e estimulante interação do usuário com o dispositivo.",550))
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,9 +34,9 @@ class frag_Titulo : Fragment() {
         var livro_recyclerview =
             rootView.findViewById(R.id.livro_recyclerview) as RecyclerView // Add this
 
-        livro_recyclerview.adapter = MainAdapter(notes()) { Note ->
-            var tit = Note.title
-            var des = Note.description
+        livro_recyclerview.adapter = MainAdapter(notes()) { retorno ->
+            var tit = retorno.title
+            var des = retorno.description
             //var aut = Note.autor
             //var res = Note.resumo
             //var pag = Note.paginas
@@ -49,10 +56,9 @@ class frag_Titulo : Fragment() {
         return rootView
 
     }
-    private fun notes(): List<Note> {
-        return listOf(
-            Note("Livro de Kotlin com Android",
-                "Este livro ensina a desenvolver aplicativos Android com a linguagem Kotlin.","Autor: Nelson Glauber", "Resumo: O Android é a plataforma do Google para dispositivos móveis que se tornou líder absoluta no mercado mundial, e a quantidade de recursos disponibilizada para os desenvolvedores permite criar uma envolvente e estimulante interação do usuário com o dispositivo.",550))
+    open fun notes(): List<Note> {
+
+        return retorno
     }
 
     }

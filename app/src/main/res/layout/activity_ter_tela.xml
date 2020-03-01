@@ -118,6 +118,12 @@
                     android:textColor="@android:color/holo_blue_light" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnVoltar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voltar" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
